@@ -1,1 +1,1 @@
-app-emulation/qemu      static-user tci QEMU_USER_TARGETS: arm armeb aarch64 aarch64_be QEMU_SOFTMMU_TARGETS: -x86_64
+app-emulation/qemu      static-user tci QEMU_SOFTMMU_TARGETS: -x86_64 arm aarch64 QEMU_USER_TARGETS: arm armeb aarch64 aarch64_be
