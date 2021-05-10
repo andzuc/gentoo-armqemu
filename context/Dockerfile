@@ -1,6 +1,6 @@
-FROM andzuc/gentoo-stage3amd64
+FROM andzuc/gentoo-stage3
 
-ENV QEMU_VERSION="2.12.1"
+ENV QEMU_VERSION="5.2.0-r3"
 COPY portage /etc/portage/
 RUN emerge -v \
     --autounmask-write=y --autounmask-continue=y \
