@@ -4,6 +4,11 @@ FROM andzuc/gentoo-portage:latest as portage
 FROM andzuc/gentoo-stage3:latest
 
 ENV HOST_FEATURES="-sandbox -usersandbox"
+ENV QEMU_VERSION="5.2.0-r3"
+
+# copy the entire portage volume in
+COPY --from=portage /var/db/repos/gentoo /var/db/repos/gentoo
+COPY portage /etc/portage/
 
 RUN lscpu \
     && (echo "MAKEOPTS='-j `lscpu|grep "Thread(s) per core:"|sed 's/^.*: *\(.*\)$/\1/'`'" >>/etc/portage/make.conf) \
@@ -11,11 +16,6 @@ RUN lscpu \
     && emerge -q --sync \
     && emerge --info
 
-# copy the entire portage volume in
-COPY --from=portage /var/db/repos/gentoo /var/db/repos/gentoo
-
-ENV QEMU_VERSION="5.2.0-r3"
-COPY portage /etc/portage/
 RUN emerge -v \
     --autounmask-write=y --autounmask-continue=y \
     =app-emulation/qemu-$QEMU_VERSION
