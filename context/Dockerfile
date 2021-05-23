@@ -18,6 +18,6 @@ RUN lscpu \
     && emerge -q --sync \
     && emerge --info
 
-RUN emerge \
+RUN emerge -q \
     --autounmask-write=y --autounmask-continue=y \
     =app-emulation/qemu-$QEMU_VERSION
