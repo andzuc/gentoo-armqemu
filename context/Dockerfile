@@ -4,6 +4,7 @@ FROM andzuc/gentoo-portage:latest as portage
 FROM andzuc/gentoo-stage3:latest
 
 ENV HOST_FEATURES="-sandbox -usersandbox"
+ENV HOST_USE="bindist"
 ENV QEMU_VERSION="5.2.0-r3"
 
 # copy the entire portage volume in
@@ -13,6 +14,7 @@ COPY portage /etc/portage/
 RUN lscpu \
     && (echo "MAKEOPTS='-j `lscpu|grep "Thread(s) per core:"|sed 's/^.*: *\(.*\)$/\1/'`'" >>/etc/portage/make.conf) \
     && (echo "FEATURES='${HOST_FEATURES}'" >>/etc/portage/make.conf) \
+    && (echo "USE='${HOST_USE}'" >>/etc/portage/make.conf) \
     && emerge -q --sync \
     && emerge --info
 
