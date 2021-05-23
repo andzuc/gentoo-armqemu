@@ -8,6 +8,7 @@ ENV HOST_FEATURES="-sandbox -usersandbox"
 RUN lscpu \
     && (echo "MAKEOPTS='-j `lscpu|grep "Thread(s) per core:"|sed 's/^.*: *\(.*\)$/\1/'`'" >>/etc/portage/make.conf) \
     && (echo "FEATURES='${HOST_FEATURES}'" >>/etc/portage/make.conf) \
+    && emerge --sync
     && emerge --info
 
 # copy the entire portage volume in
