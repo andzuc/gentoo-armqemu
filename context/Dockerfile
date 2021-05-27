@@ -15,6 +15,7 @@ RUN lscpu \
     && (echo "MAKEOPTS='-j `lscpu|grep "Thread(s) per core:"|sed 's/^.*: *\(.*\)$/\1/'`'" >>/etc/portage/make.conf) \
     && (echo "FEATURES='${HOST_FEATURES}'" >>/etc/portage/make.conf) \
     && (echo "USE='${HOST_USE}'" >>/etc/portage/make.conf) \
+    && cat /etc/portage/make.conf \ 
     && emerge -q --sync \
     && emerge --info
 
