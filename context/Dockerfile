@@ -9,7 +9,7 @@ ENV HOST_QEMU_BUILD_VER="5.2.0-r3"
 
 # copy the entire portage volume in
 COPY --from=portage /var/db/repos/gentoo /var/db/repos/gentoo
-#COPY portage /etc/portage/
+COPY portage /etc/portage/
 
 RUN ls /etc/portage
 RUN lscpu \
