@@ -28,5 +28,5 @@ jobs:
         with:
           context: context
           push: true
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/arm64
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/gentoo-qemu
