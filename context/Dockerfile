@@ -11,7 +11,7 @@ ENV QEMU_VERSION="5.2.0-r3"
 COPY --from=portage /var/db/repos/gentoo /var/db/repos/gentoo
 COPY portage /etc/portage/
 
-RUN file `which file`
+RUN ls /etc/portage
 RUN lscpu \
     && (echo "MAKEOPTS='-j `lscpu|grep "Thread(s) per core:"|sed 's/^.*: *\(.*\)$/\1/'`'" >>/etc/portage/make.conf) \
     && (echo "FEATURES='${HOST_FEATURES}'" >>/etc/portage/make.conf) \
