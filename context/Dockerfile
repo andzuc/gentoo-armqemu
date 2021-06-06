@@ -1,11 +1,11 @@
 # name the portage image
 FROM andzuc/gentoo-portage:latest as portage
 # image is based on stage3
-FROM andzuc/gentoo-stage3:latest
+FROM andzuc/gentoo-stage3:latest as stage3
 
-#ENV HOST_FEATURES="-sandbox -usersandbox -ipc-sandbox -mount-sandbox -network-sandbox -pid-sandbox"
-#ENV HOST_USE="bindist"
-#ENV QEMU_VERSION="5.2.0-r3"
+ENV HOST_FEATURES="-sandbox -usersandbox -ipc-sandbox -mount-sandbox -network-sandbox -pid-sandbox"
+ENV HOST_USE="bindist"
+ENV HOST_QEMU_BUILD_VER="5.2.0-r3"
 
 # copy the entire portage volume in
 COPY --from=portage /var/db/repos/gentoo /var/db/repos/gentoo
@@ -22,4 +22,4 @@ RUN lscpu \
 
 RUN emerge -q \
     --autounmask-write=y --autounmask-continue=y \
-    =app-emulation/qemu-$QEMU_VERSION
+    =app-emulation/qemu-${HOST_QEMU_BUILD_VER}
