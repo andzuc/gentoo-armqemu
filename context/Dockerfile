@@ -3,13 +3,13 @@ FROM andzuc/gentoo-portage:latest as portage
 # image is based on stage3
 FROM andzuc/gentoo-stage3:latest
 
-ENV HOST_FEATURES="-sandbox -usersandbox -ipc-sandbox -mount-sandbox -network-sandbox -pid-sandbox"
-ENV HOST_USE="bindist"
-ENV QEMU_VERSION="5.2.0-r3"
+#ENV HOST_FEATURES="-sandbox -usersandbox -ipc-sandbox -mount-sandbox -network-sandbox -pid-sandbox"
+#ENV HOST_USE="bindist"
+#ENV QEMU_VERSION="5.2.0-r3"
 
 # copy the entire portage volume in
 COPY --from=portage /var/db/repos/gentoo /var/db/repos/gentoo
-COPY portage /etc/portage/
+#COPY portage /etc/portage/
 
 RUN ls /etc/portage
 RUN lscpu \
