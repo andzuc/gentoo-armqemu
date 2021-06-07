@@ -11,12 +11,13 @@ ENV HOST_QEMU_BUILD_VER="5.2.0-r3"
 COPY --from=portage /var/db/repos/gentoo /var/db/repos/gentoo
 COPY portage /etc/portage/
 
-RUN ls /etc/portage
 RUN lscpu \
     && (echo "MAKEOPTS='-j `lscpu|grep "Thread(s) per core:"|sed 's/^.*: *\(.*\)$/\1/'`'" >>/etc/portage/make.conf) \
     && (echo "FEATURES='${HOST_FEATURES}'" >>/etc/portage/make.conf) \
     && (echo "USE='${HOST_USE}'" >>/etc/portage/make.conf) \
-    && cat /etc/portage/make.conf \ 
+    && echo 'This is /etc/portage/make.conf:' \
+    && cat /etc/portage/make.conf \
+    && echo 'Emerge sync&info' \
     && emerge -q --sync \
     && emerge --info
 

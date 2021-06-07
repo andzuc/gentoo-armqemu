@@ -27,8 +27,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: context
-          no-cache: true
-          pull: true
           push: true
-          platforms: linux/arm64
+          platforms: linux/amd64,linux/arm64
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/gentoo-qemu
