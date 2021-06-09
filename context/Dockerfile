@@ -21,7 +21,6 @@ RUN lscpu \
     && emerge -q --sync \
     && emerge --info
 
-RUN emerge -q \
+RUN emerge -qU \
     --autounmask-write=y --autounmask-continue=y \
-    net-misc/curl \
     =app-emulation/qemu-${HOST_QEMU_BUILD_VER}
